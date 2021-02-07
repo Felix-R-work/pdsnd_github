@@ -1,3 +1,4 @@
+# 1st change
 import time
 import pandas as pd
 import numpy as np
@@ -26,7 +27,7 @@ def get_filters():
                 city = city_name
                 flag = False
         if flag == True:
-           city_input = input("Can't find the data, please type city name  from Chicago, New york city or Washington?\n")    
+           city_input = input("Can't find the data, please type city name  from Chicago, New york city or Washington?\n")
     month=6
     day=1
     # get user input for month (all, january, february, ... , june)
@@ -58,7 +59,7 @@ def get_filters():
         if time_filter_flag == False and not (month.lower() in month_name and day.lower() in week_day):
             time_filter_flag = True
             print('Month or day is wrong, please input again\n')
-            
+
     print('-'*40)
     return city, month, day, time_filter
 
@@ -80,7 +81,7 @@ def load_data(city, month, day):
     df = pd.read_csv(filename_str)
     # convert the Start Time column to datetime
     df['Start Time'] = pd.to_datetime(df['Start Time'])
-    
+
     # extract hour from the Start Time column to create an hour column
     df['Start_hour']  = df['Start Time'].dt.hour
     df['Start_month'] = df['Start Time'].dt.month
@@ -239,11 +240,11 @@ def main():
         station_stats(df,city, month, day, time_filter)
         trip_duration_stats(df,city, month, day, time_filter)
         user_stats(df, city, month, day, time_filter)
-        
+
         head_print_input = input("Would you like see 5 lines of raw data? Enter \'yes\' for see data\n")
         if head_print_input.lower() == 'yes':
             pd.set_option('display.max_rows', 1000)
-            print(df.sample(n = 5).drop(columns=['Start_hour', 'Start_month','day_of_week'])) 
+            print(df.sample(n = 5).drop(columns=['Start_hour', 'Start_month','day_of_week']))
 
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
